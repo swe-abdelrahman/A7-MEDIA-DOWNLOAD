@@ -2,16 +2,26 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#050505">
+    <meta name="description" content="A7 Media Player - مشغل وسائط عصري سريع يدعم البث والتحميل الأونلاين بتصميم زجاجي احترافي.">
     <title>A7 Media | الموقع الرسمي</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --neon-purple: #BC00FF;
-            --neon-accent: #d400ff;
-            --bg-color: #050505;
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --neon-violet: #7C3AED;
+            --neon-accent: #D64DFF;
+            --bg-color: #050507;
+            --surface-1: rgba(255, 255, 255, 0.035);
+            --surface-2: rgba(255, 255, 255, 0.06);
+            --glass-border: rgba(255, 255, 255, 0.10);
+            --text-main: #F8FAFC;
+            --text-muted: #9CA3AF;
+            --radius-lg: 24px;
+            --radius-md: 16px;
         }
 
         * {
@@ -24,72 +34,140 @@
 
         body {
             background-color: var(--bg-color);
-            color: white;
+            color: var(--text-main);
             overflow-x: hidden;
+            line-height: 1.65;
+        }
+
+        /* Subtle background grid & dual ambient glow */
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+            background-size: 48px 48px;
+            mask-image: radial-gradient(circle at 50% 20%, black 20%, transparent 80%);
+            z-index: -2;
+            pointer-events: none;
         }
 
         .bg-glow {
             position: fixed;
-            width: 300px;
-            height: 300px;
-            background: var(--neon-purple);
-            filter: blur(120px);
+            width: 380px;
+            height: 380px;
+            background: radial-gradient(circle, var(--neon-purple), transparent 70%);
+            filter: blur(110px);
             border-radius: 50%;
             z-index: -1;
-            opacity: 0.2;
-            top: 0;
-            left: 0;
-            animation: floatGlow 15s infinite alternate ease-in-out;
+            opacity: 0.22;
+            top: -80px;
+            left: -80px;
+            animation: floatGlow 16s infinite alternate ease-in-out;
+            pointer-events: none;
         }
-        
+
         .bg-glow-2 {
             top: auto;
-            bottom: 0;
+            bottom: -100px;
             left: auto;
-            right: 0;
-            animation-delay: -5s;
+            right: -80px;
+            background: radial-gradient(circle, var(--neon-violet), transparent 70%);
+            animation-delay: -6s;
         }
 
         @keyframes floatGlow {
-            0% { transform: translate(-20px, -20px); }
-            100% { transform: translate(50px, 50px); }
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(45px, 35px) scale(1.12); }
         }
 
+        /* Navigation */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 15px 5%;
+            padding: 14px 6%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(5, 5, 5, 0.85);
-            backdrop-filter: blur(15px);
+            background: rgba(5, 5, 7, 0.78);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
             border-bottom: 1px solid var(--glass-border);
             z-index: 1000;
         }
 
-        .nav-logo {
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: white;
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             text-decoration: none;
+            color: var(--text-main);
+            font-size: 1.35rem;
+            font-weight: 900;
+            letter-spacing: -0.3px;
+        }
+
+        .nav-brand-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--neon-purple);
+            box-shadow: 0 0 12px var(--neon-purple);
         }
 
         .nav-links {
             display: flex;
-            gap: 20px;
+            align-items: center;
+            gap: 24px;
         }
 
         .nav-links a {
-            color: #aaa;
+            color: var(--text-muted);
             text-decoration: none;
             font-weight: 700;
-            transition: 0.3s;
+            font-size: 0.95rem;
+            transition: color 0.25s ease;
         }
 
         .nav-links a:hover {
-            color: var(--neon-purple);
+            color: var(--text-main);
+        }
+
+        .nav-cta {
+            padding: 8px 18px;
+            border-radius: 12px;
+            background: rgba(188, 0, 255, 0.16);
+            border: 1px solid rgba(188, 0, 255, 0.45);
+            color: #F3D1FF !important;
+            transition: background 0.25s ease, transform 0.25s ease;
+        }
+
+        .nav-cta:hover {
+            background: var(--neon-purple);
+            color: #fff !important;
+            transform: translateY(-1px);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: var(--surface-2);
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Hero Section */
+        .container {
+            width: 100%;
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
         .hero {
@@ -99,32 +177,84 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 120px 20px 50px;
+            padding: 120px 20px 70px;
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: 999px;
+            background: rgba(188, 0, 255, 0.12);
+            border: 1px solid rgba(188, 0, 255, 0.35);
+            color: #E9B8FF;
+            font-size: 0.88rem;
+            font-weight: 700;
+            margin-bottom: 26px;
+        }
+
+        .status-pill span.dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #22C55E;
+            box-shadow: 0 0 10px #22C55E;
+        }
+
+        .hero-icon-wrap {
+            position: relative;
+            margin-bottom: 24px;
+        }
+
+        .hero-icon-wrap::before {
+            content: '';
+            position: absolute;
+            inset: -10px;
+            border-radius: 36px;
+            background: linear-gradient(135deg, rgba(188, 0, 255, 0.45), rgba(124, 58, 237, 0.15));
+            filter: blur(18px);
+            z-index: -1;
         }
 
         .hero img {
             width: 120px;
             height: 120px;
-            margin-bottom: 20px;
             border-radius: 30px;
-            box-shadow: 0 0 30px rgba(188, 0, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            object-fit: cover;
+            display: block;
+            transition: transform 0.35s ease;
+        }
+
+        .hero img:hover {
+            transform: scale(1.04);
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: clamp(2.3rem, 5.5vw, 4rem);
             font-weight: 900;
-            margin-bottom: 15px;
-            background: linear-gradient(to left, #fff, #a8a8a8);
+            margin-bottom: 14px;
+            line-height: 1.15;
+            background: linear-gradient(135deg, #FFFFFF 30%, #D9A7FF 100%);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .hero p {
-            color: #aaa;
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin-bottom: 40px;
-            line-height: 1.6;
+            color: var(--text-muted);
+            font-size: clamp(1rem, 2.2vw, 1.2rem);
+            max-width: 620px;
+            margin-bottom: 34px;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 34px;
         }
 
         .btn {
@@ -132,69 +262,182 @@
             justify-content: center;
             align-items: center;
             gap: 10px;
-            background: var(--neon-purple);
-            color: white;
+            background: linear-gradient(135deg, var(--neon-purple), #9200D9);
+            color: #fff;
             text-decoration: none;
-            padding: 15px 40px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(188, 0, 255, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 14px 32px;
+            border-radius: 18px;
+            font-weight: 800;
+            font-size: 1.08rem;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+            box-shadow: 0 10px 28px rgba(188, 0, 255, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            cursor: pointer;
         }
 
         .btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(188, 0, 255, 0.6);
-            background: var(--neon-accent);
+            transform: translateY(-3px);
+            box-shadow: 0 14px 36px rgba(188, 0, 255, 0.52);
+            background: linear-gradient(135deg, var(--neon-accent), var(--neon-purple));
+        }
+
+        .btn-outline {
+            background: var(--surface-1);
+            border: 1px solid var(--glass-border);
+            box-shadow: none;
+            color: var(--text-main);
+        }
+
+        .btn-outline:hover {
+            background: var(--surface-2);
+            border-color: rgba(188, 0, 255, 0.6);
+            box-shadow: 0 8px 24px rgba(188, 0, 255, 0.2);
+        }
+
+        .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .meta-chip {
+            padding: 7px 14px;
+            border-radius: 12px;
+            background: var(--surface-1);
+            border: 1px solid var(--glass-border);
+            color: #CBD5E1;
+            font-size: 0.86rem;
+            font-weight: 600;
+        }
+
+        /* Section Shared */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 46px;
         }
 
         .section-title {
-            text-align: center;
-            font-size: 2.2rem;
-            margin-bottom: 40px;
+            font-size: clamp(1.75rem, 3.5vw, 2.35rem);
             font-weight: 900;
+            margin-bottom: 10px;
         }
 
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 540px;
+            margin: 0 auto;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-card {
+            background: var(--surface-1);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: 26px;
+            transition: transform 0.28s ease, border-color 0.28s ease, background 0.28s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(188, 0, 255, 0.45);
+            background: var(--surface-2);
+        }
+
+        .feature-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(188, 0, 255, 0.14);
+            border: 1px solid rgba(188, 0, 255, 0.3);
+            color: var(--neon-accent);
+            margin-bottom: 16px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.18rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.94rem;
+        }
+
+        /* Screenshots Gallery */
         .screenshots {
-            padding: 60px 5%;
-            background: rgba(255, 255, 255, 0.01);
+            background: rgba(255, 255, 255, 0.015);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .gallery {
             display: flex;
             justify-content: center;
-            gap: 30px;
+            gap: 28px;
             flex-wrap: wrap;
         }
 
+        .mockup-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
         .mockup {
-            width: 250px;
-            aspect-ratio: 9/19;
-            background: var(--glass-bg);
-            border: 2px solid var(--glass-border);
-            border-radius: 35px;
+            width: 245px;
+            aspect-ratio: 9 / 19;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+            border: 1.5px solid rgba(255, 255, 255, 0.14);
+            border-radius: 36px;
             padding: 10px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-            transition: 0.3s;
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.55);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            cursor: zoom-in;
             position: relative;
+            overflow: hidden;
+        }
+
+        .mockup:hover {
+            transform: translateY(-6px) scale(1.02);
+            border-color: rgba(188, 0, 255, 0.65);
+            box-shadow: 0 26px 56px rgba(188, 0, 255, 0.22);
         }
 
         .mockup img {
             width: 100%;
             height: 100%;
-            border-radius: 25px;
+            border-radius: 26px;
             object-fit: cover;
-            background-color: #111;
+            background-color: #101015;
+            display: block;
         }
 
-        .versions {
-            padding: 60px 5%;
+        .mockup-caption {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--text-muted);
         }
 
+        /* Versions */
         .versions-container {
-            max-width: 800px;
+            max-width: 820px;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
@@ -202,174 +445,403 @@
         }
 
         .version-card {
-            background: var(--glass-bg);
+            background: var(--surface-1);
             border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 25px;
+            border-radius: var(--radius-lg);
+            padding: 28px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 24px;
+            transition: border-color 0.25s ease;
+        }
+
+        .version-card.featured {
+            background: linear-gradient(135deg, rgba(188, 0, 255, 0.09), rgba(255, 255, 255, 0.03));
+            border-color: rgba(188, 0, 255, 0.42);
+            box-shadow: 0 16px 40px rgba(188, 0, 255, 0.1);
+        }
+
+        .version-head {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 8px;
         }
 
         .version-info h3 {
-            font-size: 1.5rem;
-            color: white;
-            margin-bottom: 5px;
+            font-size: 1.45rem;
+            font-weight: 800;
         }
 
-        .version-info .badge {
+        .badge {
             background: var(--neon-purple);
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            margin-right: 10px;
-            font-weight: bold;
+            color: #fff;
+            padding: 3px 12px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 800;
+        }
+
+        .badge-muted {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-muted);
         }
 
         .version-info p {
-            color: #888;
-            margin-top: 10px;
-            font-size: 0.95rem;
-            line-height: 1.5;
+            color: var(--text-muted);
+            font-size: 0.96rem;
         }
 
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--neon-purple);
-            box-shadow: none;
-            padding: 12px 25px;
-            font-size: 1rem;
+        .changelog {
+            margin-top: 12px;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            color: #CBD5E1;
+            font-size: 0.9rem;
         }
 
+        .changelog li::before {
+            content: '• ';
+            color: var(--neon-accent);
+            font-weight: 900;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(4, 4, 8, 0.9);
+            backdrop-filter: blur(12px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 24px;
+        }
+
+        .lightbox.open {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: min(92vw, 420px);
+            max-height: 86vh;
+            border-radius: 26px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--glass-border);
+            background: var(--surface-2);
+            color: #fff;
+            font-size: 1.4rem;
+            cursor: pointer;
+        }
+
+        /* Footer */
         footer {
-            padding: 50px 20px 30px;
+            padding: 56px 20px 36px;
             text-align: center;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.65);
             border-top: 1px solid var(--glass-border);
         }
 
         .developer-badge {
-            background: rgba(188, 0, 255, 0.05);
-            border: 1px solid rgba(188, 0, 255, 0.2);
-            padding: 25px 20px;
-            border-radius: 20px;
-            margin-bottom: 30px;
+            background: linear-gradient(135deg, rgba(188, 0, 255, 0.08), rgba(255, 255, 255, 0.02));
+            border: 1px solid rgba(188, 0, 255, 0.25);
+            padding: 26px 32px;
+            border-radius: var(--radius-lg);
+            margin-bottom: 28px;
             display: inline-block;
             max-width: 100%;
         }
 
         .developer-badge h4 {
-            color: #aaa;
-            font-weight: normal;
-            margin-bottom: 10px;
-            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-bottom: 8px;
+            font-size: 0.92rem;
         }
 
-        .developer-badge a {
+        .developer-name {
             font-size: 1.5rem;
             font-weight: 900;
-            color: white;
+            color: #fff;
             text-decoration: none;
             display: block;
-            margin-bottom: 15px;
+            margin-bottom: 14px;
         }
 
         .portfolio-btn {
-            color: var(--neon-purple) !important;
-            font-size: 1rem !important;
-            display: inline-flex !important;
+            color: var(--neon-accent);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.98rem;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
+            padding: 8px 16px;
+            border-radius: 12px;
+            background: rgba(188, 0, 255, 0.12);
+            border: 1px solid rgba(188, 0, 255, 0.3);
+            transition: background 0.25s ease;
+        }
+
+        .portfolio-btn:hover {
+            background: rgba(188, 0, 255, 0.24);
         }
 
         .copyright {
-            color: #555;
-            font-size: 0.85rem;
+            color: #6B7280;
+            font-size: 0.88rem;
         }
 
-        /* 📱 دعم شاشات الموبايل كلياً */
+        /* Scroll reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 0.55s ease, transform 0.55s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         @media (max-width: 768px) {
-            .nav-links { display: none; } 
-            .nav-logo { width: 100%; text-align: center; justify-content: center; }
-            .hero h1 { font-size: 2.2rem; }
-            .hero p { font-size: 1rem; padding: 0 10px; }
-            .btn { width: 100%; font-size: 1.1rem; padding: 15px; }
-            .gallery { flex-direction: column; align-items: center; }
-            .mockup { width: 100%; max-width: 280px; }
-            .version-card { flex-direction: column; text-align: center; gap: 20px; padding: 20px; }
-            .developer-badge { width: 100%; padding: 20px 10px; }
-            .developer-badge a { font-size: 1.3rem; }
+            .menu-toggle {
+                display: inline-flex;
+            }
+            .nav-links {
+                position: fixed;
+                top: 71px;
+                right: 16px;
+                left: 16px;
+                flex-direction: column;
+                background: rgba(12, 12, 18, 0.96);
+                backdrop-filter: blur(20px);
+                border: 1px solid var(--glass-border);
+                border-radius: 18px;
+                padding: 18px;
+                gap: 14px;
+                display: none;
+            }
+            .nav-links.open {
+                display: flex;
+            }
+            .hero-actions {
+                width: 100%;
+                flex-direction: column;
+            }
+            .hero-actions .btn {
+                width: 100%;
+            }
+            .mockup {
+                width: 100%;
+                max-width: 280px;
+            }
+            .version-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 22px;
+            }
+            .version-head {
+                justify-content: center;
+            }
+            .version-card .btn {
+                width: 100%;
+            }
+            .developer-badge {
+                width: 100%;
+                padding: 22px 18px;
+            }
         }
     </style>
 </head>
 <body>
 
+    <div class="bg-grid"></div>
     <div class="bg-glow"></div>
     <div class="bg-glow bg-glow-2"></div>
 
     <nav>
-        <a href="#" class="nav-logo">A7 Media</a>
-        <div class="nav-links">
+        <a href="#hero" class="nav-brand">
+            <span class="nav-brand-dot"></span>
+            <span>A7 Media</span>
+        </a>
+        <button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <div class="nav-links" id="navLinks">
             <a href="#hero">الرئيسية</a>
+            <a href="#features">المميزات</a>
             <a href="#screenshots">التطبيق</a>
             <a href="#versions">الإصدارات</a>
+            <a href="https://github.com/swe-abdelrahman/A7-MEDIA-DOWNLOAD/releases/download/v1.0.1_on_publish/app-release.apk" class="nav-cta">تحميل v1.0.1</a>
         </div>
     </nav>
 
     <section class="hero" id="hero">
-        <img src="icon.png" alt="A7 Media Logo" onerror="this.src='https://via.placeholder.com/120/111/BC00FF?text=A7'">
+        <div class="status-pill">
+            <span class="dot"></span>
+            <span>الإصدار v1.0.1 متاح الآن • Android APK</span>
+        </div>
+
+        <div class="hero-icon-wrap">
+            <img src="icon.png" alt="A7 Media Logo" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 120 120%22><defs><linearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22><stop offset=%220%25%22 stop-color=%22%23BC00FF%22/><stop offset=%22100%25%22 stop-color=%22%234C1D95%22/></linearGradient></defs><rect width=%22120%22 height=%22120%22 rx=%2228%22 fill=%22%230F0F16%22/><circle cx=%2260%22 cy=%2260%22 r=%2238%22 fill=%22url(%23g)%22 opacity=%220.22%22/><text x=%2250%25%22 y=%2256%25%22 text-anchor=%22middle%22 fill=%22%23E9B8FF%22 font-family=%22Arial%22 font-weight=%22bold%22 font-size=%2234%22>A7</text></svg>';">
+        </div>
+
         <h1>A7 Media Player</h1>
-        <p>مشغل الوسائط الأقوى والأخف على الإطلاق. استمتع بتجربة تشغيل وتحميل خالية من التقطيع، مع تصميم زجاجي عصري لا مثيل له.</p>
-        
-        <a href="#versions" class="btn">
-            <span>حمل التطبيق الآن</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-        </a>
+        <p>مشغّل وسائط احترافي وخفيف على الأندرويد. استمتع بتجربة بث وتحميل أونلاين سريعة بدون تقطيع، مع تصميم زجاجي عصري وتخصيص كامل لخلفيتك.</p>
+
+        <div class="hero-actions">
+            <a href="https://github.com/swe-abdelrahman/A7-MEDIA-DOWNLOAD/releases/download/v1.0.1_on_publish/app-release.apk" class="btn">
+                <span>تحميل التطبيق الآن (v1.0.1)</span>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            </a>
+            <a href="#versions" class="btn btn-outline">
+                <span>كل الإصدارات</span>
+            </a>
+        </div>
+
+        <div class="hero-meta">
+            <span class="meta-chip">بث وتحميل سريع بدون تقطيع</span>
+            <span class="meta-chip">تشغيل في الخلفية وشاشة القفل</span>
+            <span class="meta-chip">خلفية مخصصة مع Blur مباشر</span>
+        </div>
+    </section>
+
+    <section id="features">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="section-title">لماذا A7 Media؟</h2>
+                <p class="section-subtitle">مصمم بعناية ليجمع بين السرعة الفائقة والواجهة البسيطة الفخمة.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    </div>
+                    <h3>بث وتحميل فائق السرعة</h3>
+                    <p>محرك بث ذكي بتقنية التحميل المتقطع السريع لتشغيل وتحميل المقاطع الصوتية أونلاين بأعلى استقرار.</p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                    </div>
+                    <h3>مشغّل احترافي في الخلفية</h3>
+                    <p>تحكم كامل من شاشة القفل والإشعارات مع قوائم تشغيل، مؤقت نوم، وضبط سرعة التشغيل.</p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                    </div>
+                    <h3>تخصيص الخلفية باحترافية</h3>
+                    <p>اختر أي صورة من معرضك مع معاينة تفاعلية فورية وتحكم بدرجة التمويه والإعتام.</p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h3>خفيف وآمن ومجاني</h3>
+                    <p>بدون إعلانات مزعجة أو تعقيد، مع حفظ فوري للملفات في جهازك وتنظيم تلقائي للمكتبة.</p>
+                </div>
+            </div>
+        </div>
     </section>
 
     <section class="screenshots" id="screenshots">
-        <h2 class="section-title">نظرة من الداخل</h2>
-        <div class="gallery">
-            <div class="mockup">
-                <img src="screen1.png" alt="شاشة المشغل" onerror="this.src='https://via.placeholder.com/250x520/111/555?text=Screen+1'">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="section-title">نظرة من الداخل</h2>
+                <p class="section-subtitle">اضغط على أي شاشة لتكبيرها ومعاينة تفاصيل الواجهة.</p>
             </div>
-            <div class="mockup">
-                <img src="screen2.png" alt="شاشة التحميلات" onerror="this.src='https://via.placeholder.com/250x520/111/555?text=Screen+2'">
-            </div>
-            <div class="mockup">
-                <img src="screen3.png" alt="شاشة الإعدادات" onerror="this.src='https://via.placeholder.com/250x520/111/555?text=Screen+3'">
+            <div class="gallery">
+                <div class="mockup-item reveal">
+                    <div class="mockup" data-img="screen1.png">
+                        <img src="screen1.png" alt="شاشة المشغل" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 250 520%22><rect width=%22250%22 height=%22520%22 fill=%22%23101016%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 fill=%22%239CA3AF%22 font-family=%22Arial%22 font-size=%2218%22>شاشة المشغل</text></svg>';">
+                    </div>
+                    <span class="mockup-caption">المشغّل الاحترافي</span>
+                </div>
+
+                <div class="mockup-item reveal">
+                    <div class="mockup" data-img="screen2.png">
+                        <img src="screen2.png" alt="شاشة التحميلات" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 250 520%22><rect width=%22250%22 height=%22520%22 fill=%22%23101016%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 fill=%22%239CA3AF%22 font-family=%22Arial%22 font-size=%2218%22>التحميلات والأونلاين</text></svg>';">
+                    </div>
+                    <span class="mockup-caption">الاستكشاف والتحميلات</span>
+                </div>
+
+                <div class="mockup-item reveal">
+                    <div class="mockup" data-img="screen3.png">
+                        <img src="screen3.png" alt="شاشة الإعدادات" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 250 520%22><rect width=%22250%22 height=%22520%22 fill=%22%23101016%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 fill=%22%239CA3AF%22 font-family=%22Arial%22 font-size=%2218%22>المكتبة والإعدادات</text></svg>';">
+                    </div>
+                    <span class="mockup-caption">المكتبة والإعدادات</span>
+                </div>
             </div>
         </div>
     </section>
 
     <section class="versions" id="versions">
-        <h2 class="section-title">إصدارات التطبيق</h2>
-        <div class="versions-container">
-            <div class="version-card">
-                <div class="version-info">
-                    <h3>الإصدار v1.0.1 <span class="badge">الأحدث 🔥</span></h3>
-                    <p>النسخة المستقرة. تدعم التحميل اونلابن بأداء خفيف وسريع.</p>
-                </div>
-                <a href="https://github.com/man9000442-hub/A7-MEDIA-DOWNLOAD/releases/download/v1.0.1_on_publish/app-arm64-v8a-release.apk" class="btn">تحميل APK</a>
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="section-title">إصدارات التطبيق</h2>
+                <p class="section-subtitle">اختر الإصدار المناسب لهاتفك وحمّله مباشرة بصيغة APK.</p>
             </div>
-            <div class="version-card">
-                <div class="version-info">
-                    <h3>الإصدار v1.0.0 <span class="badge">الاصدار السابق</span></h3>
-                    <p>النسخة المستقرة.لا تدعم التحميل اونلابن .</p>
+
+            <div class="versions-container">
+                <div class="version-card featured reveal">
+                    <div class="version-info">
+                        <div class="version-head">
+                            <h3>الإصدار v1.0.1</h3>
+                            <span class="badge">الأحدث • موصى به</span>
+                        </div>
+                        <p>النسخة الأحدث والأكثر استقراراً لجميع هواتف أندرويد.</p>
+                        <ul class="changelog">
+                            <li>تشغيل وتحميل أونلاين سريع ومستقر بدون تقطيع أو أخطاء 403.</li>
+                            <li>واجهة عصرية محدثة مع منتقي خلفيات احترافي ومعاينة مباشرة.</li>
+                            <li>تحسينات شاملة في استهلاك البطارية وسرعة القراءة.</li>
+                        </ul>
+                    </div>
+                    <a href="https://github.com/swe-abdelrahman/A7-MEDIA-DOWNLOAD/releases/download/v1.0.1_on_publish/app-release.apk" class="btn">تحميل APK</a>
                 </div>
-                <a href="https://github.com/man9000442-hub/A7-MEDIA-DOWNLOAD/releases/download/v1.0.0_on_publish/app-arm64-v8a-release.apk" class="btn">تحميل APK</a>
+
+                <div class="version-card reveal">
+                    <div class="version-info">
+                        <div class="version-head">
+                            <h3>الإصدار v1.0.0</h3>
+                            <span class="badge badge-muted">الإصدار السابق</span>
+                        </div>
+                        <p>النسخة الأولى المستقرة لتشغيل الملفات المحلية (لا تدعم التحميل أونلاين).</p>
+                    </div>
+                    <a href="https://github.com/man9000442-hub/A7-MEDIA-DOWNLOAD/releases/download/v1.0.0_on_publish/app-arm64-v8a-release.apk" class="btn btn-outline">تحميل APK</a>
+                </div>
             </div>
         </div>
     </section>
 
     <footer id="developer">
-        <div class="developer-badge">
+        <div class="developer-badge reveal">
             <h4>تم التصميم والتطوير بواسطة مهندس البرمجيات</h4>
-            <a href="https://man9000442-hub.github.io/Eng-Abdelrahman-prot/" target="_blank">Eng. Abdelrahman Tarek</a>
-            <a href="https://man9000442-hub.github.io/Eng-Abdelrahman-prot/" target="_blank" class="portfolio-btn">
-                زيارة معرض الأعمال (Portfolio) 
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            <a href="https://man9000442-hub.github.io/Eng-Abdelrahman-prot/" target="_blank" rel="noopener noreferrer" class="developer-name">Eng. Abdelrahman Tarek</a>
+            <a href="https://man9000442-hub.github.io/Eng-Abdelrahman-prot/" target="_blank" rel="noopener noreferrer" class="portfolio-btn">
+                زيارة معرض الأعمال (Portfolio)
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
             </a>
         </div>
         <div class="copyright">
@@ -377,5 +849,59 @@
         </div>
     </footer>
 
+    <!-- Lightbox Modal for Screenshots -->
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+        <button class="lightbox-close" id="lightboxClose" aria-label="إغلاق">&times;</button>
+        <img id="lightboxImg" src="" alt="معاينة الشاشة">
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => navLinks.classList.remove('open'));
+        });
+
+        // Lightbox screenshot preview
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxClose = document.getElementById('lightboxClose');
+        document.querySelectorAll('.mockup').forEach(card => {
+            card.addEventListener('click', () => {
+                const img = card.querySelector('img');
+                lightboxImg.src = img.src;
+                lightbox.classList.add('open');
+                lightbox.setAttribute('aria-hidden', 'false');
+            });
+        });
+        function closeLightbox() {
+            lightbox.classList.remove('open');
+            lightbox.setAttribute('aria-hidden', 'true');
+        }
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+        // Smooth scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+
 </body>
 </html>
+
